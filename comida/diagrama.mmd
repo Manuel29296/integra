@@ -1,0 +1,34 @@
+classDiagram
+    class Plato {
+        -nombre: str
+        -precio: float
+        +__init__(nombre: str, precio: float)
+        +__str__() str
+    }
+
+    class Menu {
+        -platos: dict
+        +__init__()
+        +agregar_plato(nombre: str, precio: float)
+        +obtener_plato(nombre: str) Plato
+    }
+
+    class Pedido {
+        -platos: list
+        +__init__()
+        +agregar_plato(plato: Plato)
+        +calcular_total() float
+    }
+
+    class Restaurante {
+        -menu: Menu
+        -pedidos: list
+        +__init__(menu: Menu)
+        +crear_pedido() Pedido
+        +agregar_plato_a_pedido(pedido: Pedido, nombre_plato: str) bool
+    }
+
+    Menu "1" --> "*" Plato : contiene
+    Restaurante "1" --> "1" Menu : usa
+    Restaurante "1" --> "*" Pedido : gestiona
+    Pedido "1" --> "*" Plato : incluye
